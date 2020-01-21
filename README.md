@@ -50,7 +50,17 @@ label y:
 	"world"
 	jump x
 ```
-Je tam někde i python support ze kterého to prý má vycházet.
-
+Je tam někde i python support ze kterého to prý má vycházet:
+```python
+python:
+    player_health = max(player_health - damage, 0)
+    if enemy_vampire:
+        enemy_health = min(enemy_health + damage, enemy_max_health)
+```
 Funguje to celkem dobře pro to, co to má dělat, ale ten python support je tedy divný - 
-jako kdyby se vývojáři nedokázáli shodnout, co to má vlastně být a byli moc líní napsat celý jazyk.
+jako kdyby se vývojáři nedokázáli shodnout,
+co to má vlastně být a byli moc líní napsat celý jazyk.
+
+
+
+
