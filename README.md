@@ -67,4 +67,6 @@ Dodatečně je renpy rasistické na tabulátor ve skriptech:
 
 ### Tabs vs. Spaces
 
+![tabs](tabs.jpg)
 
+Krvavá debata o odsazování kódu.
