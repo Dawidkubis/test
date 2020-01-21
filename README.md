@@ -10,9 +10,9 @@ Dawid chyběl.
 
 ### Idea
 
-Animace vypadala sympaticky
+Animace vypadala sympaticky.
 
-Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.google.com/document/d/1-aIxD_GheagFxuDhVp_X0G1NvYPB8MfaCgDtlZa69qw)
+Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.google.com/document/d/1-aIxD_GheagFxuDhVp_X0G1NvYPB8MfaCgDtlZa69qw).
 
 ### Zpracování
 
@@ -39,3 +39,14 @@ Ochrana proti soudění se s Nintendo: `Mario` -> `Marian`.
 V plánu je napsat mírně vtipný, romantický a bizardní příběh.
 
 ### Technické poznámky
+
+RenPy syntaxe je velice bizardní:
+```renpy
+label x:
+	"hello"
+	jump y
+
+label y:
+	"world"
+	jump x
+```
