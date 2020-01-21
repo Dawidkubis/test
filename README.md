@@ -25,6 +25,14 @@ Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.goo
 
 Před Vánocemi vznikl první snímek nadějné animace v Kritě
 
-Přes Vánoce. v Kritě
+### Idea #2
 
-Přes Vánoce.....
+Vznik vcelku spontánní
+
+Dawid znal **RenPy**
+
+Započali jsme práci na SuperMarian Dating-Sim
+
+### SuperMarian Dating-Sim
+
+Inspirováno ze stránky [DokiDokiLiteratureClub](https://ddlc.moe) a 
