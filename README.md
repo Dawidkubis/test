@@ -50,3 +50,7 @@ label y:
 	"world"
 	jump x
 ```
+Je tam někde i python support ze kterého to prý má vycházet.
+
+Funguje to celkem dobře pro to, co to má dělat, ale ten python support je tedy divný - 
+jako kdyby se vývojáři nedokázáli shodnout, co to má vlastně být a byli moc líní napsat celý jazyk.
