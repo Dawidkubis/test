@@ -61,6 +61,9 @@ Funguje to celkem dobře pro to, co to má dělat, ale ten python support je ted
 jako kdyby se vývojáři nedokázáli shodnout,
 co to má vlastně být a byli moc líní napsat celý jazyk.
 
+Dodatečně je renpy rasistické na tabulátor ve skriptech:
+(rasismus)[rasismus.png]
 
+### Tabs vs. Spaces
 
 
