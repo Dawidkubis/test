@@ -23,6 +23,8 @@ Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.goo
 
 ### Zpracování
 
-Před Vánocemi vznikl první snímek nadějné animace
+Před Vánocemi vznikl první snímek nadějné animace v Kritě
 
+Přes Vánoce. v Kritě
 
+Přes Vánoce.....
