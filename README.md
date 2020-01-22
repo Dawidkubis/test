@@ -57,16 +57,33 @@ python:
     if enemy_vampire:
         enemy_health = min(enemy_health + damage, enemy_max_health)
 ```
-Funguje to celkem dobře pro to, co to má dělat, ale ten python support je tedy divný - 
-jako kdyby se vývojáři nedokázáli shodnout,
-co to má vlastně být a byli moc líní napsat celý jazyk.
+Celkem divné - dávalo by větší smysl dělat konzistentní jazyk.
 
 Dodatečně je renpy rasistické na tabulátor ve skriptech:
 
 ![rasismus](rasismus.png)
 
-### Tabs vs. Spaces
+#### Tabs vs. Spaces
 
 ![tabs](tabs.jpg)
 
 Krvavá debata o odsazování kódu.
+
+`	` <-- tohle je tab, kódovaný 0000 1001
+` `   <-- tohle je mezera, kódovaná 0010 0000
+
+Takže pro 3000 řádku odsazeného kódu to je
+`3000 * 3 * 8 = 72 000` ztracených bitů, což je celých 9 kilobytů.
+
+To je problém když jsou token trees definovány odsazením.
+
+Proti tabům jsou argumenty jako variabilní délka.
+
+#### python bytecode
+
+
+#### rendering v pygame
+
+#### multiplatform release
+
+
