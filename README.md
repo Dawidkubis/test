@@ -18,6 +18,10 @@ Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.goo
 
 Před Vánocemi vznikl první snímek nadějné animace v Kritě.
 
+Ten snímek byl navždy ztracen.
+
+![angry](angry.jpg)
+
 Idea byla rychle zahozena z důvodů komplikace příběhu, délce a škále projektu, nedostatku času a Miklášovy neschopnosti kreslit dynamické scény.
 
 ### Idea #2
