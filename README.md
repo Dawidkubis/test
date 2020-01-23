@@ -74,6 +74,7 @@ Dodatečně je renpy rasistické na tabulátor ve skriptech:
 Krvavá debata o odsazování kódu.
 
 `	` <-- tohle je tab, kódovaný 0000 1001
+
 ` `   <-- tohle je mezera, kódovaná 0010 0000
 
 Takže pro 3000 řádku odsazeného kódu to je
