@@ -1,4 +1,4 @@
-# MŮJ PROJEKT A MIKULÁŠ HO DĚLAL TAKY
+# Super Marian Dating Sim
 ---------------------------------
 + Kubis
 + Pliska
@@ -93,8 +93,12 @@ Proti tabům jsou argumenty jako variabilní délka.
 
 #### python bytecode
 
+
+
 #### rendering v pygame
 
 #### multiplatform release
 
+### Prezentace
 
+#### rust
