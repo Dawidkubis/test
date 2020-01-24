@@ -93,7 +93,16 @@ Proti tabům jsou argumenty jako variabilní délka.
 
 #### python bytecode
 
+```python
+def hello()
+    print("Hello, World!")
+```
 
+```
+2           0 LOAD_GLOBAL              0 (print)
+            2 LOAD_CONST               1 ('Hello, World!')
+            4 CALL_FUNCTION            1
+```
 
 #### rendering v pygame
 
