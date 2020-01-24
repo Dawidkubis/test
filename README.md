@@ -133,4 +133,19 @@ Všechny soubory, které je potřeba servovat jsou v mým [git repositáři](htt
 
 ![rust](rust.jpg)
 
-
+```
+.
+|-- Cargo.lock # jednotné dependency verze
+|-- Cargo.toml # dependency a kompilacni nastaveni
+|-- Makefile # build tool
+|-- README.md # popis
+|-- settings.toml # serverova nastaveni
+|-- src # source code
+|   |-- cli.rs # command line argumenty
+|   |-- main.rs # main thread
+|   |-- response.rs # response typy pro markdown parsing
+|   |-- routes.rs # endpointy
+|   |-- rsp.rs # parsing nastaveni repositare
+|   `-- settings.rs # parsing settings.toml
+`-- sserver -> target/release/sserver # zkratka pro zkompilovanou binarku
+```
