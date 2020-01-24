@@ -9,6 +9,8 @@ Mikuláš se přihlásil, že bude dělat animaci.
 
 Dawid chyběl.
 
+![anime](anime.jpg)
+
 ### Idea
 
 Animace vypadala sympaticky.
@@ -119,3 +121,5 @@ def hello()
 #### rust
 
 ![rust](rust.jpg)
+
+
