@@ -14,6 +14,8 @@ Animace vypadala sympaticky.
 
 Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.google.com/document/d/1-aIxD_GheagFxuDhVp_X0G1NvYPB8MfaCgDtlZa69qw).
 
+![bara](bullets.jpg)
+
 ### Zpracování
 
 Před Vánocemi vznikl první snímek nadějné animace v Kritě.
@@ -34,11 +36,15 @@ Započali jsme práci na SuperMarian Dating-Sim.
 
 Práce šly celkem dobře jelikož měl Mikuláš talent na kreslení nintendo postaviček.
 
+![bara](bara.png)
+
 ### SuperMarian Dating-Sim
 
 Inspirováno ze stránky [DokiDokiLiteratureClub](https://ddlc.moe).
 
 Ochrana proti soudění se s Nintendo: `Mario` -> `Marian`.
+
+![reggie](reggie.jpg)
 
 V plánu je napsat mírně vtipný, romantický a bizardní příběh.
 
@@ -85,7 +91,6 @@ To je problém když jsou token trees definovány odsazením.
 Proti tabům jsou argumenty jako variabilní délka.
 
 #### python bytecode
-
 
 #### rendering v pygame
 
