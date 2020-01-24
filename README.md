@@ -118,7 +118,18 @@ def hello()
 
 ![powerpoint](powerpoint.jpg)
 
-#### rust
+Pak zbývalo jen vytvořit prezentaci.
+
+Beží to na rustovým backendu, frontend v markdownu.
+
+Markdown se potom parsuje do html skeleton souboru.
+
+To se pak stylizuje s jednotným css a vytváří tuhle stránku.
+
+Všechny soubory, které je potřeba servovat jsou v mým [git repositáři](https://github.com/Dawidkubis/test),
+ který se pulluje backendem.
+
+#### rust a rustový backend
 
 ![rust](rust.jpg)
 
