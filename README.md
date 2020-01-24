@@ -110,6 +110,8 @@ def hello()
 
 #### multiplatform release
 
+![widle](widle.jpg)
+
 ### Prezentace
 
 #### rust
