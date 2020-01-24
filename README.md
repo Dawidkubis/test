@@ -114,4 +114,6 @@ def hello()
 
 ### Prezentace
 
+![powerpoint](powerpoint.jpg)
+
 #### rust
