@@ -106,6 +106,8 @@ def hello()
 
 #### rendering v pygame
 
+![grafarna](grafarna.png)
+
 #### multiplatform release
 
 ### Prezentace
