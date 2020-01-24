@@ -95,20 +95,37 @@ Proti tabům jsou argumenty jako variabilní délka.
 
 #### python bytecode
 
+Tenhle kus kódu:
 ```python
 def hello()
     print("Hello, World!")
 ```
-
+Se zkomiluje na:
 ```
 2           0 LOAD_GLOBAL              0 (print)
             2 LOAD_CONST               1 ('Hello, World!')
             4 CALL_FUNCTION            1
 ```
+Je to sice zrychlení "interpretace" ale vyžaduje to kompilaci projektu.
 
 #### rendering v pygame
 
 ![grafarna](grafarna.png)
+
+Pygame je backend pro renpy který řídí to, aby se hra vůbec dokázala zobrazit.
+
+Abstrakční strom vypadá nějak takhle.
+
+```
+Python, Cpython - binarni kod - procesor
+ |
+Pygame - C - OpenGl - graficka karta
+		 |
+	  direct3d
+	  	 |
+	  graficka karta
+
+```
 
 #### multiplatform release
 
