@@ -133,6 +133,8 @@ Všechny soubory, které je potřeba servovat jsou v mým [git repositáři](htt
 
 ![rust](rust.jpg)
 
+
+Struktura backendu:
 ```
 .
 |-- Cargo.lock # jednotné dependency verze
