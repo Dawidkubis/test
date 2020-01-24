@@ -131,6 +131,8 @@ Pygame - C - OpenGl - graficka karta
 
 ![widle](widle.jpg)
 
+Renpy se dodáva na všechny používané operační systémy.
+
 ### Prezentace
 
 ![powerpoint](powerpoint.jpg)
