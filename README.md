@@ -63,16 +63,16 @@ label y:
 	"world"
 	jump x
 ```
-Je tam někde i python support ze kterého to prý má vycházet:
+python support:
 ```python
 python:
     player_health = max(player_health - damage, 0)
     if enemy_vampire:
         enemy_health = min(enemy_health + damage, enemy_max_health)
 ```
-Celkem divné - dávalo by větší smysl dělat konzistentní jazyk.
+Nekonzistentní jazyk.
 
-Dodatečně je renpy rasistické na tabulátor ve skriptech:
+Rasismus na tabulátor ve skriptech:
 
 ![rasismus](rasismus.png)
 
@@ -82,14 +82,12 @@ Dodatečně je renpy rasistické na tabulátor ve skriptech:
 
 Krvavá debata o odsazování kódu.
 
-`	` <-- tohle je tab, kódovaný 0000 1001
+`	` <-- tab, kódovaný 0000 1001
 
-` `   <-- tohle je mezera, kódovaná 0010 0000
+` `   <-- mezera, kódovaná 0010 0000
 
 Takže pro 3000 řádku odsazeného kódu to je
-`3000 * 3 * 8 = 72 000` ztracených bitů, což je celých 9 kilobytů.
-
-To je problém když jsou token trees definovány odsazením.
+`3000 * 3 * 8 = 72 000` ztracených bitů, což je celých 9 kilobytů - problém když jsou token trees definovány odsazením.
 
 Proti tabům jsou argumenty jako variabilní délka.
 
@@ -100,19 +98,19 @@ Tenhle kus kódu:
 def hello()
     print("Hello, World!")
 ```
-Se zkomiluje na:
+Se zkompiluje na:
 ```
 2           0 LOAD_GLOBAL              0 (print)
             2 LOAD_CONST               1 ('Hello, World!')
             4 CALL_FUNCTION            1
 ```
-Je to sice zrychlení "interpretace" ale vyžaduje to kompilaci projektu.
+Zrychlení "interpretace" - vyžaduje to kompilaci projektu.
 
 #### rendering v pygame
 
 ![grafarna](grafarna.png)
 
-Pygame je backend pro renpy který řídí to, aby se hra vůbec dokázala zobrazit.
+Pygame je backend pro renpy.
 
 Abstrakční strom vypadá nějak takhle.
 
@@ -131,7 +129,9 @@ Pygame - C - OpenGl - graficka karta
 
 ![widle](widle.jpg)
 
-Renpy se dodáva na všechny používané operační systémy.
+Renpy se dodáva na všechny používané operační systémy
+
+... v jednom zipu.
 
 ### Prezentace
 
@@ -152,7 +152,6 @@ Všechny soubory, které je potřeba servovat jsou v mým [git repositáři](htt
 
 ![rust](rust.jpg)
 
-
 Struktura backendu:
 ```
 .
@@ -170,3 +169,9 @@ Struktura backendu:
 |   `-- settings.rs # parsing settings.toml
 `-- sserver -> target/release/sserver # zkratka pro zkompilovanou binarku
 ```
+
+#### proč rust?
+
++ Rust je bezpečný.
++ Rust je rychlý.
++ Rust má dobrou syntaxi.
