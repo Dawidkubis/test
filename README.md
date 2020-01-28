@@ -49,6 +49,15 @@ Ochrana proti soudění se s Nintendo: `Mario` -> `Marian`.
 
 V plánu je napsat mírně vtipný, romantický a bizardní příběh.
 
+### Software
+
++ Neovim
++ Renpy Engine
++ Krita
++ Python
++ rustup, rustc, cargo
++ gcc
+
 ### Technické poznámky
 
 RenPy syntaxe je velice bizardní:
@@ -80,9 +89,9 @@ Rasismus na tabulátor ve skriptech:
 
 Krvavá debata o odsazování kódu.
 
-`	` <-- tab, kódovaný 0000 1001
+`|	|` <-- tab, kódovaný 0000 1001
 
-` `   <-- mezera, kódovaná 0010 0000
+`| |`   <-- mezera, kódovaná 0010 0000
 
 Takže pro 3000 řádku odsazeného kódu to je
 `3000 * 3 * 8 = 72 000` ztracených bitů, což je celých 9 kilobytů - problém když jsou token trees definovány odsazením.
