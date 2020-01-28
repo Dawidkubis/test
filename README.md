@@ -57,6 +57,7 @@ V plánu je napsat mírně vtipný, romantický a bizardní příběh.
 + Python
 + rustup, rustc, cargo
 + gcc
++ gource, ffmpeg
 
 ### Technické poznámky
 
@@ -182,3 +183,8 @@ Struktura backendu:
 + Rust je bezpečný.
 + Rust je rychlý.
 + Rust má dobrou syntaxi.
+
+
+#### gource záběry
+![marian](marian_gource.mp4)
+![sserver](sserver_gource.mp4)
