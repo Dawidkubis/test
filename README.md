@@ -3,12 +3,14 @@
 + Kubis
 + Pliska
 
+<<>>
 ## Animace
 
 Mikuláš se přihlásil, že bude dělat animaci.
 
 Dawid chyběl.
 
+<<>>
 ### Idea
 
 Animace vypadala sympaticky.
@@ -17,6 +19,7 @@ Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.goo
 
 ![bara](bullets.jpg)
 
+<<>>
 ### Zpracování
 
 Před Vánocemi vznikl první snímek nadějné animace v Kritě.
@@ -27,6 +30,7 @@ Ten snímek byl navždy ztracen.
 
 Idea byla rychle zahozena z důvodů komplikace příběhu, délce a škále projektu, nedostatku času a Miklášovy neschopnosti kreslit dynamické scény.
 
+<<>>
 ### Idea #2
 
 Vznik vcelku spontánní.
@@ -39,6 +43,7 @@ Práce šly celkem dobře jelikož měl Mikuláš talent na kreslení nintendo p
 
 ![bara](bara.png)
 
+<<>>
 ### SuperMarian Dating-Sim
 
 Inspirováno ze stránky [DokiDokiLiteratureClub](https://ddlc.moe).
@@ -49,6 +54,7 @@ Ochrana proti soudění se s Nintendo: `Mario` -> `Marian`.
 
 V plánu je napsat mírně vtipný, romantický a bizardní příběh.
 
+<<>>
 ### Software
 
 + Neovim
@@ -59,6 +65,7 @@ V plánu je napsat mírně vtipný, romantický a bizardní příběh.
 + gcc
 + gource, ffmpeg
 
+<<>>
 ### Technické poznámky
 
 RenPy syntaxe je velice bizardní:
@@ -84,6 +91,7 @@ Rasismus na tabulátor ve skriptech:
 
 ![rasismus](rasismus.png)
 
+<<>>
 #### Tabs vs. Spaces
 
 ![tabs](tabs.jpg)
@@ -99,6 +107,7 @@ Takže pro 3000 řádku odsazeného kódu to je
 
 Proti tabům jsou argumenty jako variabilní délka.
 
+<<>>
 #### python bytecode
 
 Tenhle kus kódu:
@@ -114,6 +123,7 @@ Se zkompiluje na:
 ```
 Zrychlení "interpretace" - vyžaduje to kompilaci projektu.
 
+<<>>
 #### rendering v pygame
 
 ![grafarna](grafarna.png)
@@ -133,6 +143,7 @@ Pygame - C - OpenGl - graficka karta
 
 ```
 
+<<>>
 #### multiplatform release
 
 ![widle](widle.jpg)
@@ -141,6 +152,7 @@ Renpy se dodáva na všechny používané operační systémy
 
 ... v jednom zipu.
 
+<<>>
 ### Prezentace
 
 ![powerpoint](powerpoint.jpg)
@@ -156,6 +168,7 @@ To se pak stylizuje s jednotným css a vytváří tuhle stránku.
 Všechny soubory, které je potřeba servovat jsou v mým [git repositáři](https://github.com/Dawidkubis/test),
  který se pulluje backendem.
 
+<<>>
 #### rust a rustový backend
 
 ![rust](rust.jpg)
@@ -178,13 +191,14 @@ Struktura backendu:
 `-- sserver -> target/release/sserver # zkratka pro zkompilovanou binarku
 ```
 
+<<>>
 #### proč rust?
 
 + Rust je bezpečný.
 + Rust je rychlý.
 + Rust má dobrou syntaxi.
 
-
+<<>>
 #### gource záběry
-![marian](marian_gource.mp4)
-![sserver](sserver_gource.mp4)
++ [marian](marian_gource.mp4)
++ [sserver](sserver_gource.mp4)
