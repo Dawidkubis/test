@@ -24,9 +24,10 @@ Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.goo
 
 Před Vánocemi vznikl první snímek nadějné animace v Kritě.
 
-Ten snímek byl navždy ztracen.
-
 ![angry](angry.jpg)
+
+<<>>
+### ...
 
 Idea byla rychle zahozena z důvodů komplikace příběhu, délce a škále projektu, nedostatku času a Miklášovy neschopnosti kreslit dynamické scény.
 
@@ -37,22 +38,22 @@ Vznik vcelku spontánní.
 
 Dawid znal **RenPy**.
 
-Započali jsme práci na SuperMarian Dating-Sim.
+Započali jsme práce na SuperMarian Dating-Sim.
 
-Práce šly celkem dobře jelikož měl Mikuláš talent na kreslení nintendo postaviček.
+Práce šly celkem dobře jelikož Mikuláš měl talent na kreslení Nintendo postaviček.
 
-![bara](bara.png)
+![marian](marian.png)
 
 <<>>
 ### SuperMarian Dating-Sim
 
 Inspirováno ze stránky [DokiDokiLiteratureClub](https://ddlc.moe).
 
-Ochrana proti soudění se s Nintendo: `Mario` -> `Marian`.
+Prevence případné žaloby ze strany Nintenda: *Mario* -> *Marian*.
 
 ![reggie](reggie.jpg)
 
-V plánu je napsat mírně vtipný, romantický a bizardní příběh.
+V plánu je napsat mírně vtipný, romantický a bizarní příběh.
 
 <<>>
 ### Software
@@ -68,7 +69,7 @@ V plánu je napsat mírně vtipný, romantický a bizardní příběh.
 <<>>
 ### Technické poznámky
 
-RenPy syntaxe je velice bizardní:
+RenPy syntaxe je velice bizarní:
 ```renpy
 label x:
 	"hello"
@@ -105,10 +106,10 @@ Krvavá debata o odsazování kódu.
 Takže pro 3000 řádku odsazeného kódu to je
 `3000 * 3 * 8 = 72 000` ztracených bitů, což je celých 9 kilobytů - problém když jsou token trees definovány odsazením.
 
-Proti tabům jsou argumenty jako variabilní délka.
+Argumentem proti tabům je například jejich variabilní délka.
 
 <<>>
-#### python bytecode
+#### Python bytecode
 
 Tenhle kus kódu:
 ```python
@@ -121,10 +122,10 @@ Se zkompiluje na:
             2 LOAD_CONST               1 ('Hello, World!')
             4 CALL_FUNCTION            1
 ```
-Zrychlení "interpretace" - vyžaduje to kompilaci projektu.
+Zrychlení "interpretace" - vyžaduje kompilaci projektu.
 
 <<>>
-#### rendering v pygame
+#### Rendering v pygame
 
 ![grafarna](grafarna.png)
 
@@ -144,7 +145,7 @@ Pygame - C - OpenGl - graficka karta
 ```
 
 <<>>
-#### multiplatform release
+#### Multiplatform release
 
 ![widle](widle.jpg)
 
