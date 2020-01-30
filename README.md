@@ -200,5 +200,5 @@ Struktura backendu:
 
 <<>>
 #### gource záběry
-+ [marian](marian_gource.mp4)
-+ [sserver](sserver_gource.mp4)
++ [marian](https://drive.google.com/file/d/1EyIXlh5UfTlCK6vTmyOWpZdnqGF8BiUw/view?usp=sharing)
++ [sserver](https://drive.google.com/file/d/1SbKFVbmZMZoil69LQxHNK9Q8CzvopxEd/view?usp=sharing)
