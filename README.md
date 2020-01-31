@@ -65,6 +65,7 @@ V plánu je napsat mírně vtipný, romantický a bizarní příběh.
 + rustup, rustc, cargo
 + gcc
 + gource, ffmpeg
++ firefox
 
 <<>>
 ### Technické poznámky
