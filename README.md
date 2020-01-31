@@ -17,7 +17,7 @@ Animace vypadala sympaticky.
 
 Nabízelo se zpracování známé povídky [*Plastic soldiers*](https://docs.google.com/document/d/1-aIxD_GheagFxuDhVp_X0G1NvYPB8MfaCgDtlZa69qw).
 
-![bara](bullets.jpg)
+![bullets](bullets.jpg)
 
 <<>>
 ### Zpracování
@@ -151,7 +151,7 @@ Pygame - C - OpenGl - graficka karta
 
 Renpy se dodáva na všechny používané operační systémy
 
-... v jednom zipu.
+... v jednom zipu - problém se spustitelností.
 
 <<>>
 ### Prezentace
@@ -162,12 +162,11 @@ Pak zbývalo jen vytvořit prezentaci.
 
 Beží to na rustovým backendu, frontend v markdownu.
 
-Markdown se potom parsuje do html skeleton souboru.
+Markdown se potom rozdělen na slejdy a zkompilován html.
 
 To se pak stylizuje s jednotným css a vytváří tuhle stránku.
 
-Všechny soubory, které je potřeba servovat jsou v mým [git repositáři](https://github.com/Dawidkubis/test),
- který se pulluje backendem.
+Všechny soubory, které je potřeba servovat jsou v mým [git repositáři](https://github.com/Dawidkubis/test).
 
 <<>>
 #### rust a rustový backend
@@ -177,19 +176,19 @@ Všechny soubory, které je potřeba servovat jsou v mým [git repositáři](htt
 Struktura backendu:
 ```
 .
-|-- Cargo.lock # jednotné dependency verze
-|-- Cargo.toml # dependency a kompilacni nastaveni
-|-- Makefile # build tool
+|-- Cargo.lock # lock na verze
+|-- Cargo.toml # dependencies
+|-- Makefile # pro make
 |-- README.md # popis
-|-- settings.toml # serverova nastaveni
-|-- src # source code
-|   |-- cli.rs # command line argumenty
-|   |-- main.rs # main thread
-|   |-- response.rs # response typy pro markdown parsing
-|   |-- routes.rs # endpointy
-|   |-- rsp.rs # parsing nastaveni repositare
-|   `-- settings.rs # parsing settings.toml
-`-- sserver -> target/release/sserver # zkratka pro zkompilovanou binarku
+|-- pressent -> target/release/pressent # symlink
+`-- src # source
+    |-- cli.rs # argumenty
+    |-- main.css # css
+    |-- main.js # javascript fuj fuj
+    |-- main.rs # spousteni serveru
+    |-- request.rs # specialni typy pro praci se souborem
+    |-- response.rs # specialni typy pro praci s markdownem
+    `-- routes.rs # endpointy
 ```
 
 <<>>
@@ -198,6 +197,7 @@ Struktura backendu:
 + Rust je bezpečný.
 + Rust je rychlý.
 + Rust má dobrou syntaxi.
++ Rust umí skvěle multithreading.
 
 <<>>
 #### gource záběry
