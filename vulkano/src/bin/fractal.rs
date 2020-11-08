@@ -1,25 +1,18 @@
+use image::{ImageBuffer, Rgba};
 use std::sync::Arc;
 use vulkano::{
-	device::{Device, DeviceExtensions, Features},
-	instance::{Instance, InstanceExtensions, PhysicalDevice},
 	buffer::{BufferUsage, CpuAccessibleBuffer},
-	command_buffer::{
-		AutoCommandBufferBuilder,
-		CommandBuffer,
-	},
-	sync::GpuFuture,
-	pipeline::ComputePipeline,
+	command_buffer::{AutoCommandBufferBuilder, CommandBuffer},
 	descriptor::{
-		descriptor_set::PersistentDescriptorSet,
-		pipeline_layout::PipelineLayoutAbstract,
+		descriptor_set::PersistentDescriptorSet, pipeline_layout::PipelineLayoutAbstract,
 	},
+	device::{Device, DeviceExtensions, Features},
 	format::Format,
-	image::{
-		Dimensions,
-		StorageImage,
-	},
+	image::{Dimensions, StorageImage},
+	instance::{Instance, InstanceExtensions, PhysicalDevice},
+	pipeline::ComputePipeline,
+	sync::GpuFuture,
 };
-use image::{Rgba, ImageBuffer};
 
 fn main() {
 	// SETUP
@@ -39,7 +32,7 @@ fn main() {
 	let queue = queues.next().unwrap();
 
 	mod cs {
-		vulkano_shaders::shader!{
+		vulkano_shaders::shader! {
 			ty: "compute",
 			src: "
 #version 450
@@ -73,39 +66,58 @@ void main() {
 	}
 	let shader = cs::Shader::load(device.clone()).unwrap();
 
-	let compute_pipeline = Arc::new(
-		ComputePipeline::new(device.clone(), &shader.main_entry_point(), &())
-		.unwrap()
-	);
+	let compute_pipeline =
+		Arc::new(ComputePipeline::new(device.clone(), &shader.main_entry_point(), &()).unwrap());
 
 	let image = StorageImage::new(
-	device.clone(),
-	Dimensions::Dim2d { width: 1024, height: 1024 },
-    Format::R8G8B8A8Unorm,
-	Some(queue.family())
-	).unwrap();
+		device.clone(),
+		Dimensions::Dim2d {
+			width: 1024,
+			height: 1024,
+		},
+		Format::R8G8B8A8Unorm,
+		Some(queue.family()),
+	)
+	.unwrap();
 
 	let layout = compute_pipeline.layout().descriptor_set_layout(0).unwrap();
-	let set = Arc::new(PersistentDescriptorSet::start(layout.clone())
-		.add_image(image.clone()).unwrap()
-		.build().unwrap()
+	let set = Arc::new(
+		PersistentDescriptorSet::start(layout.clone())
+			.add_image(image.clone())
+			.unwrap()
+			.build()
+			.unwrap(),
 	);
 
-	let buf = CpuAccessibleBuffer::from_iter(device.clone(), BufferUsage::all(), false,
-		(0 .. 1024 * 1024 * 4).map(|_| 0u8)).unwrap();
+	let buf = CpuAccessibleBuffer::from_iter(
+		device.clone(),
+		BufferUsage::all(),
+		false,
+		(0..1024 * 1024 * 4).map(|_| 0u8),
+	)
+	.unwrap();
 
 	let mut builder = AutoCommandBufferBuilder::new(device.clone(), queue.family()).unwrap();
 	builder
-		.dispatch([1024/8, 1024/8, 1], compute_pipeline.clone(), set.clone(), ()).unwrap()
-		.copy_image_to_buffer(image.clone(), buf.clone()).unwrap();
-	
+		.dispatch(
+			[1024 / 8, 1024 / 8, 1],
+			compute_pipeline.clone(),
+			set.clone(),
+			(),
+		)
+		.unwrap()
+		.copy_image_to_buffer(image.clone(), buf.clone())
+		.unwrap();
+
 	let command_buffer = builder.build().unwrap();
 	let finished = command_buffer.execute(queue.clone()).unwrap();
-	finished.then_signal_fence_and_flush().unwrap()
-		.wait(None).unwrap();
+	finished
+		.then_signal_fence_and_flush()
+		.unwrap()
+		.wait(None)
+		.unwrap();
 
 	let buffer_content = buf.read().unwrap();
-	let image = ImageBuffer::<Rgba<u8>, _>::from_raw(1024, 1024, &buffer_content[..])
-		.unwrap();
+	let image = ImageBuffer::<Rgba<u8>, _>::from_raw(1024, 1024, &buffer_content[..]).unwrap();
 	image.save("frac.png").unwrap();
 }

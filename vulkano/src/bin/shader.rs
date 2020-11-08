@@ -1,18 +1,14 @@
 use std::sync::Arc;
 use vulkano::{
+	buffer::{BufferUsage, CpuAccessibleBuffer},
+	command_buffer::{AutoCommandBufferBuilder, CommandBuffer},
+	descriptor::{
+		descriptor_set::PersistentDescriptorSet, pipeline_layout::PipelineLayoutAbstract,
+	},
 	device::{Device, DeviceExtensions, Features},
 	instance::{Instance, InstanceExtensions, PhysicalDevice},
-	buffer::{BufferUsage, CpuAccessibleBuffer},
-	command_buffer::{
-		AutoCommandBufferBuilder,
-		CommandBuffer,
-	},
-	sync::GpuFuture,
 	pipeline::ComputePipeline,
-	descriptor::{
-		descriptor_set::PersistentDescriptorSet,
-		pipeline_layout::PipelineLayoutAbstract,
-	},
+	sync::GpuFuture,
 };
 
 fn main() {
@@ -28,7 +24,7 @@ fn main() {
 	let (device, mut queues) = Device::new(
 		physical,
 		&Features::none(),
-		&DeviceExtensions{
+		&DeviceExtensions {
 			khr_storage_buffer_storage_class: true,
 			..DeviceExtensions::none()
 		},
@@ -39,18 +35,18 @@ fn main() {
 
 	// actual thing.
 	// here is a data buffer containing 65536 numbers
-	let data_iter = 0 .. 65536;
-	let data_buffer = CpuAccessibleBuffer::from_iter(
-		device.clone(), BufferUsage::all(), false, data_iter,
-		).unwrap();
+	let data_iter = 0..65536;
+	let data_buffer =
+		CpuAccessibleBuffer::from_iter(device.clone(), BufferUsage::all(), false, data_iter)
+			.unwrap();
 
 	// here is a shader that is to be compiled.
 	// it will multiply anything that is in the set 0 binding 0 by 12 -
 	// we are gonna put our data_buffer in there.
 	mod cs {
-    	vulkano_shaders::shader!{
-        	ty: "compute",
-        	src: "
+		vulkano_shaders::shader! {
+			ty: "compute",
+			src: "
 #version 450
 
 layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
@@ -64,17 +60,15 @@ void main() {
 	buf.data[idx] *= 12;
 }
 "
-    	}
+		}
 	}
 
 	// here i am loading the shader.
 	let shader = cs::Shader::load(device.clone()).unwrap();
 
 	// creating a compute pipeline, with the shader's main entry point.
-	let compute_pipeline = Arc::new(
-		ComputePipeline::new(device.clone(), &shader.main_entry_point(), &())
-		.unwrap()
-	);
+	let compute_pipeline =
+		Arc::new(ComputePipeline::new(device.clone(), &shader.main_entry_point(), &()).unwrap());
 
 	// no idea what i am doing here
 	// i think im describing where the data should be pointing
@@ -82,24 +76,25 @@ void main() {
 	// and now here is my descriptor set with the buffer inside
 	let set = Arc::new(
 		PersistentDescriptorSet::start(layout.clone())
-			.add_buffer(data_buffer.clone()).unwrap()
-			.build()
+			.add_buffer(data_buffer.clone())
 			.unwrap()
+			.build()
+			.unwrap(),
 	);
 
 	// command buffer ready
-	let mut builder = AutoCommandBufferBuilder::new(device.clone(), queue.family())
-		.unwrap();
-	builder.dispatch([1024, 1, 1], compute_pipeline.clone(), set.clone(), ())
+	let mut builder = AutoCommandBufferBuilder::new(device.clone(), queue.family()).unwrap();
+	builder
+		.dispatch([1024, 1, 1], compute_pipeline.clone(), set.clone(), ())
 		.unwrap();
 
-	let command_buffer = builder
-		.build()
-		.unwrap();
+	let command_buffer = builder.build().unwrap();
 
 	// execution and waiting
 	let finished = command_buffer.execute(queue.clone()).unwrap();
-	finished.then_signal_fence_and_flush().unwrap()
+	finished
+		.then_signal_fence_and_flush()
+		.unwrap()
 		.wait(None)
 		.unwrap();
 

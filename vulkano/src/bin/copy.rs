@@ -1,12 +1,9 @@
 use vulkano::{
+	buffer::{BufferUsage, CpuAccessibleBuffer},
+	command_buffer::{AutoCommandBufferBuilder, CommandBuffer},
 	device::{Device, DeviceExtensions, Features},
 	instance::{Instance, InstanceExtensions, PhysicalDevice},
-	buffer::{BufferUsage, CpuAccessibleBuffer},
-	command_buffer::{
-		AutoCommandBufferBuilder,
-		CommandBuffer,
-	},
-	sync::GpuFuture
+	sync::GpuFuture,
 };
 
 fn main() {
@@ -43,25 +40,24 @@ fn main() {
 	// i am choosing the queue since i know there is only one
 	// (i chose one queue family)
 	let queue = queues.next().unwrap();
-	
+
 	// creating a buffer and loading data into it.
 	// they will be stored in the gpu.
 	// i will be transmitting it from one buffer to another
-	let source_content = 0 .. 64;
-	let source = CpuAccessibleBuffer::from_iter(
-		device.clone(), BufferUsage::all(), false, source_content,
-	).unwrap();
+	let source_content = 0..64;
+	let source =
+		CpuAccessibleBuffer::from_iter(device.clone(), BufferUsage::all(), false, source_content)
+			.unwrap();
 	// the third bool argument asks if the buffer should be cpu cached
 	// this will rarely give a performance boost, so should be false
 
-	let dest_content = (0 .. 64).map(|_| 0);
-	let dest = CpuAccessibleBuffer::from_iter(
-		device.clone(), BufferUsage::all(), false, dest_content,
-	).unwrap();
+	let dest_content = (0..64).map(|_| 0);
+	let dest =
+		CpuAccessibleBuffer::from_iter(device.clone(), BufferUsage::all(), false, dest_content)
+			.unwrap();
 
 	// creating a command buffer.
-	let mut builder = AutoCommandBufferBuilder::new(device.clone(), queue.family())
-		.unwrap();
+	let mut builder = AutoCommandBufferBuilder::new(device.clone(), queue.family()).unwrap();
 	builder.copy_buffer(source.clone(), dest.clone()).unwrap();
 	let command_buffer = builder.build().unwrap();
 
@@ -69,7 +65,8 @@ fn main() {
 	let finished = command_buffer.execute(queue.clone()).unwrap();
 
 	// waiting for the execution to finish
-	finished.then_signal_fence_and_flush()
+	finished
+		.then_signal_fence_and_flush()
 		.unwrap()
 		.wait(None)
 		.unwrap();

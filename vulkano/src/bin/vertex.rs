@@ -1,20 +1,16 @@
+use image::{ImageBuffer, Rgba};
 use std::sync::Arc;
 use vulkano::{
-	device::{Device, DeviceExtensions, Features},
-	instance::{Instance, InstanceExtensions, PhysicalDevice},
 	buffer::{BufferUsage, CpuAccessibleBuffer},
-	command_buffer::{
-		AutoCommandBufferBuilder,
-		CommandBuffer,
-		DynamicState,
-	},
-	framebuffer::{Framebuffer, Subpass},
-	sync::GpuFuture,
+	command_buffer::{AutoCommandBufferBuilder, CommandBuffer, DynamicState},
+	device::{Device, DeviceExtensions, Features},
 	format::Format,
+	framebuffer::{Framebuffer, Subpass},
+	image::{Dimensions, StorageImage},
+	instance::{Instance, InstanceExtensions, PhysicalDevice},
 	pipeline::{viewport::Viewport, GraphicsPipeline},
-	image::{StorageImage, Dimensions},
+	sync::GpuFuture,
 };
-use image::{Rgba, ImageBuffer};
 
 // a structure describing a vertex in 2d space
 #[derive(Default, Copy, Clone)]
@@ -44,9 +40,15 @@ fn main() {
 	vulkano::impl_vertex!(Vertex, position);
 
 	// create 3 vertices
-	let vertex1 = Vertex { position: [-0.5, -0.5] };
-	let vertex2 = Vertex { position: [0.0, 0.5] };
-	let vertex3 = Vertex { position: [0.5, -0.25] };
+	let vertex1 = Vertex {
+		position: [-0.5, -0.5],
+	};
+	let vertex2 = Vertex {
+		position: [0.0, 0.5],
+	};
+	let vertex3 = Vertex {
+		position: [0.5, -0.25],
+	};
 
 	// put them in a buffer
 	let vertex_buffer = CpuAccessibleBuffer::from_iter(
@@ -54,38 +56,38 @@ fn main() {
 		BufferUsage::all(),
 		false,
 		vec![vertex1, vertex2, vertex3].into_iter(),
-		).unwrap();
+	)
+	.unwrap();
 
 	// create image
 	// vulkan will draw to
-    let image = StorageImage::new(
-        device.clone(),
-        Dimensions::Dim2d {
-            width: 1024,
-            height: 1024,
-        },
-        Format::R8G8B8A8Unorm,
-        Some(queue.family()),
-    )
-    .unwrap();
+	let image = StorageImage::new(
+		device.clone(),
+		Dimensions::Dim2d {
+			width: 1024,
+			height: 1024,
+		},
+		Format::R8G8B8A8Unorm,
+		Some(queue.family()),
+	)
+	.unwrap();
 
 	// create buffer to read the image
-    let buf = CpuAccessibleBuffer::from_iter(
-        device.clone(),
-        BufferUsage::all(),
-        false,
-        (0..1024 * 1024 * 4).map(|_| 0u8),
-    )
-    .expect("failed to create buffer");
+	let buf = CpuAccessibleBuffer::from_iter(
+		device.clone(),
+		BufferUsage::all(),
+		false,
+		(0..1024 * 1024 * 4).map(|_| 0u8),
+	)
+	.expect("failed to create buffer");
 
-	
 	// Vertex shader, (type vertex)
 	// it runs for every vertex in vertex_buffer
 	// and positions it in space
 	// gl_Position describes properties of the vertex and the first
 	// two arguments are the position
 	mod vs {
-		vulkano_shaders::shader!{
+		vulkano_shaders::shader! {
 			ty: "vertex",
 			src: "
 	#version 450
@@ -102,7 +104,7 @@ fn main() {
 	// runs for every pixel inside the triangle
 	// this will fill the triangle red
 	mod fs {
-		vulkano_shaders::shader!{
+		vulkano_shaders::shader! {
 			ty: "fragment",
 			src: "
 	#version 450
@@ -122,89 +124,89 @@ fn main() {
 	// create a render pass
 	// basically like n word pass but for rendering
 	// comes with a bunch of settings
-    let render_pass = Arc::new(
-        vulkano::single_pass_renderpass!(device.clone(),
-            attachments: {
-                color: {
-                    load: Clear,
-                    store: Store,
-                    format: Format::R8G8B8A8Unorm,
-                    samples: 1,
-                }
-            },
-            pass: {
-                color: [color],
-                depth_stencil: {}
-            }
-        )
-        .unwrap(),
-    );
+	let render_pass = Arc::new(
+		vulkano::single_pass_renderpass!(device.clone(),
+			attachments: {
+				color: {
+					load: Clear,
+					store: Store,
+					format: Format::R8G8B8A8Unorm,
+					samples: 1,
+				}
+			},
+			pass: {
+				color: [color],
+				depth_stencil: {}
+			}
+		)
+		.unwrap(),
+	);
 
 	// the framebuffer contains the image we draw on
-    let framebuffer = Arc::new(
-        Framebuffer::start(render_pass.clone())
-            .add(image.clone())
-            .unwrap()
-            .build()
-            .unwrap(),
-    );
+	let framebuffer = Arc::new(
+		Framebuffer::start(render_pass.clone())
+			.add(image.clone())
+			.unwrap()
+			.build()
+			.unwrap(),
+	);
 
 	// create the graphics pipeline needed for rendering
-    let pipeline = Arc::new(
-        GraphicsPipeline::start()
-            .vertex_input_single_buffer::<Vertex>()
-            .vertex_shader(vs.main_entry_point(), ())
-            .viewports_dynamic_scissors_irrelevant(1)
-            .fragment_shader(fs.main_entry_point(), ())
-            .render_pass(Subpass::from(render_pass.clone(), 0).unwrap())
-            .build(device.clone())
-            .unwrap(),
-    );
-	
+	let pipeline = Arc::new(
+		GraphicsPipeline::start()
+			.vertex_input_single_buffer::<Vertex>()
+			.vertex_shader(vs.main_entry_point(), ())
+			.viewports_dynamic_scissors_irrelevant(1)
+			.fragment_shader(fs.main_entry_point(), ())
+			.render_pass(Subpass::from(render_pass.clone(), 0).unwrap())
+			.build(device.clone())
+			.unwrap(),
+	);
+
 	// explains the image
-    let dynamic_state = DynamicState {
-        viewports: Some(vec![Viewport {
-            origin: [0.0, 0.0],
-            dimensions: [1024.0, 1024.0],
-            depth_range: 0.0..1.0,
-        }]),
-        ..DynamicState::none()
-    };
+	let dynamic_state = DynamicState {
+		viewports: Some(vec![Viewport {
+			origin: [0.0, 0.0],
+			dimensions: [1024.0, 1024.0],
+			depth_range: 0.0..1.0,
+		}]),
+		..DynamicState::none()
+	};
 
 	// creating command builder
-	let mut builder = AutoCommandBufferBuilder::
-	primary_one_time_submit(device.clone(), queue.family()).unwrap();
+	let mut builder =
+		AutoCommandBufferBuilder::primary_one_time_submit(device.clone(), queue.family()).unwrap();
 
 	builder
 		.begin_render_pass(
-            framebuffer.clone(),
-            false,
-            vec![[0.0, 0.0, 1.0, 1.0].into()],
-        )
-        .unwrap()
-        .draw(
-            pipeline.clone(),
-            &dynamic_state,
-            vertex_buffer.clone(),
-            (),
-            (),
-        )
-        .unwrap()
-        .end_render_pass()
-        .unwrap()
-        .copy_image_to_buffer(image.clone(), buf.clone())
-        .unwrap();
+			framebuffer.clone(),
+			false,
+			vec![[0.0, 0.0, 1.0, 1.0].into()],
+		)
+		.unwrap()
+		.draw(
+			pipeline.clone(),
+			&dynamic_state,
+			vertex_buffer.clone(),
+			(),
+			(),
+		)
+		.unwrap()
+		.end_render_pass()
+		.unwrap()
+		.copy_image_to_buffer(image.clone(), buf.clone())
+		.unwrap();
 
-    let command_buffer = builder.build().unwrap();
+	let command_buffer = builder.build().unwrap();
 
-    let finished = command_buffer.execute(queue.clone()).unwrap();
-    finished
-        .then_signal_fence_and_flush()
-        .unwrap()
-        .wait(None)
-        .unwrap();
+	let finished = command_buffer.execute(queue.clone()).unwrap();
+	finished
+		.then_signal_fence_and_flush()
+		.unwrap()
+		.wait(None)
+		.unwrap();
 
-    let buffer_content = buf.read().unwrap();
-    let image = ImageBuffer::<Rgba<u8>, _>::from_raw(1024, 1024, &buffer_content[..]).unwrap();
-    image.save("render.png").unwrap();
+	let buffer_content = buf.read().unwrap();
+	let image = ImageBuffer::<Rgba<u8>, _>::from_raw(1024, 1024, &buffer_content[..]).unwrap();
+	image.save("render.png").unwrap();
 }
