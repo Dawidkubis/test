@@ -51,6 +51,8 @@ fn main() {
 	let source = CpuAccessibleBuffer::from_iter(
 		device.clone(), BufferUsage::all(), false, source_content,
 	).unwrap();
+	// the third bool argument asks if the buffer should be cpu cached
+	// this will rarely give a performance boost, so should be false
 
 	let dest_content = (0 .. 64).map(|_| 0);
 	let dest = CpuAccessibleBuffer::from_iter(
@@ -58,12 +60,10 @@ fn main() {
 	).unwrap();
 
 	// creating a command buffer.
-	let command_buffer = AutoCommandBufferBuilder::new(device.clone(), queue.family())
-		.unwrap()
-		.copy_buffer(source.clone(), dest.clone())
-		.unwrap()
-		.build()
+	let mut builder = AutoCommandBufferBuilder::new(device.clone(), queue.family())
 		.unwrap();
+	builder.copy_buffer(source.clone(), dest.clone()).unwrap();
+	let command_buffer = builder.build().unwrap();
 
 	// executing the commands
 	let finished = command_buffer.execute(queue.clone()).unwrap();

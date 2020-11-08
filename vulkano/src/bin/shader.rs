@@ -51,18 +51,19 @@ fn main() {
     	vulkano_shaders::shader!{
         	ty: "compute",
         	src: "
-	#version 450
+#version 450
 
-	layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
+layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
 
-	layout(set = 0, binding = 0) buffer Data {
-    	uint data[];
-	} buf;
+layout(set = 0, binding = 0) buffer Data {
+	uint data[];
+} buf;
 
-	void main() {
-    	uint idx = gl_GlobalInvocationID.x;
-    	buf.data[idx] *= 12;
-	}"
+void main() {
+	uint idx = gl_GlobalInvocationID.x;
+	buf.data[idx] *= 12;
+}
+"
     	}
 	}
 
@@ -76,6 +77,7 @@ fn main() {
 	);
 
 	// no idea what i am doing here
+	// i think im describing where the data should be pointing
 	let layout = compute_pipeline.layout().descriptor_set_layout(0).unwrap();
 	// and now here is my descriptor set with the buffer inside
 	let set = Arc::new(
@@ -86,10 +88,12 @@ fn main() {
 	);
 
 	// command buffer ready
-	let command_buffer = AutoCommandBufferBuilder::new(device.clone(), queue.family())
-		.unwrap()
-		.dispatch([1024, 1, 1], compute_pipeline.clone(), set.clone(), ())
-		.unwrap()
+	let mut builder = AutoCommandBufferBuilder::new(device.clone(), queue.family())
+		.unwrap();
+	builder.dispatch([1024, 1, 1], compute_pipeline.clone(), set.clone(), ())
+		.unwrap();
+
+	let command_buffer = builder
 		.build()
 		.unwrap();
 
