@@ -1,0 +1,6 @@
+.gitignore
+
+CFLAGS += -Wall
+CFLAGS += -g
+
+: *.cpp |> g++ $(CFLAGS) %f -o %o && ./%o > %o_output.ppm |> %B | %B_output.ppm
